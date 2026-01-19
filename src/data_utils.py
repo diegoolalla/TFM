@@ -171,6 +171,11 @@ def handle_missing_values(df, strategy='mean', threshold=0.5):
                 else:
                     continue
                 
+                # Skip if fill_value is NaN (all values are NaN)
+                if pd.isna(fill_value):
+                    print(f"Columna '{col}': todos los valores son NaN, no se puede imputar")
+                    continue
+                
                 df_clean[col].fillna(fill_value, inplace=True)
                 print(f"Columna '{col}' imputada con {strategy}: {fill_value:.2f}")
     

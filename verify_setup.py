@@ -7,6 +7,9 @@ Ejecuta este script para verificar que todo está configurado correctamente
 import sys
 import importlib
 
+# Constante para el formateo de nombres
+NAME_WIDTH = 20
+
 def check_module(module_name, display_name=None):
     """Verifica si un módulo está instalado"""
     if display_name is None:
@@ -14,10 +17,10 @@ def check_module(module_name, display_name=None):
     
     try:
         importlib.import_module(module_name)
-        print(f"✅ {display_name:<20} - Instalado")
+        print(f"✅ {display_name:<{NAME_WIDTH}} - Instalado")
         return True
     except ImportError:
-        print(f"❌ {display_name:<20} - NO instalado")
+        print(f"❌ {display_name:<{NAME_WIDTH}} - NO instalado")
         return False
 
 def check_python_version():
@@ -100,9 +103,9 @@ def main():
     dirs_ok = True
     for dir_name in required_dirs:
         if os.path.isdir(dir_name):
-            print(f"✅ {dir_name:<20} - Existe")
+            print(f"✅ {dir_name:<{NAME_WIDTH}} - Existe")
         else:
-            print(f"❌ {dir_name:<20} - NO existe")
+            print(f"❌ {dir_name:<{NAME_WIDTH}} - NO existe")
             dirs_ok = False
     print()
     
