@@ -162,7 +162,12 @@ def handle_missing_values(df, strategy='mean', threshold=0.5):
                 elif strategy == 'median':
                     fill_value = df_clean[col].median()
                 elif strategy == 'mode':
-                    fill_value = df_clean[col].mode()[0]
+                    mode_values = df_clean[col].mode()
+                    if len(mode_values) > 0:
+                        fill_value = mode_values[0]
+                    else:
+                        # If no mode, fallback to median
+                        fill_value = df_clean[col].median()
                 else:
                     continue
                 

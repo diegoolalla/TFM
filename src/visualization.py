@@ -53,7 +53,11 @@ def plot_distribution(df, columns=None, bins=30, figsize=(15, 10), save_path=Non
     n_rows = (n_cols + 2) // 3
     
     fig, axes = plt.subplots(n_rows, 3, figsize=figsize)
-    axes = axes.flatten() if n_cols > 1 else [axes]
+    # Handle axes array properly for different subplot configurations
+    if isinstance(axes, np.ndarray):
+        axes = axes.flatten()
+    else:
+        axes = [axes]
     
     for idx, col in enumerate(columns):
         if idx < len(axes):
@@ -145,7 +149,11 @@ def plot_boxplots(df, columns=None, figsize=(15, 10), save_path=None):
     n_rows = (n_cols + 2) // 3
     
     fig, axes = plt.subplots(n_rows, 3, figsize=figsize)
-    axes = axes.flatten() if n_cols > 1 else [axes]
+    # Handle axes array properly for different subplot configurations
+    if isinstance(axes, np.ndarray):
+        axes = axes.flatten()
+    else:
+        axes = [axes]
     
     for idx, col in enumerate(columns):
         if idx < len(axes):
@@ -233,7 +241,11 @@ def plot_feature_vs_target(df, feature_columns, target_column, figsize=(15, 10),
     n_rows = (n_features + 2) // 3
     
     fig, axes = plt.subplots(n_rows, 3, figsize=figsize)
-    axes = axes.flatten() if n_features > 1 else [axes]
+    # Handle axes array properly for different subplot configurations
+    if isinstance(axes, np.ndarray):
+        axes = axes.flatten()
+    else:
+        axes = [axes]
     
     for idx, feature in enumerate(feature_columns):
         if idx < len(axes):
